@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background:  210 5% 4%;      /* White background */
+    --foreground: 0 0% 0%;        /* Black text */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 44 100% 50%;       /* UNSW Yellow #FFB800 */
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 0%;         /* Black */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 44 100% 50%;        /* UNSW Yellow */
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 44 100% 50%;          /* UNSW Yellow */
+    --chart-1: 44 100% 50%;  /* UNSW Yellow */
+    --chart-2: 44 80% 40%;   /* Darker Yellow */
+    --chart-3: 0 0% 20%;     /* Light Black */
+    --chart-4: 0 0% 40%;     /* Medium Gray */
+    --chart-5: 0 0% 60%;     /* Light Gray */
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  h1 {
+    @apply text-2xl font-bold md:text-4xl text-black;
+  }
+
+  h2 {
+    @apply text-lg font-bold md:text-xl text-black;
+  }
+
+  .prose h2 {
+    @apply text-2xl mb-2 text-black;
+  }
+
+  .prose h3,
+  h3 {
+    @apply mt-3 text-xl mb-1 text-black;
+  }
+
+  .prose h4 {
+    @apply text-lg mb-2 text-black;
+  }
+
+  .prose li {
+    @apply pl-0 my-0 text-base list-disc text-black;
+  }
+
+  .prose strong {
+    @apply font-semibold text-black;
+  }
+
+  .prose blockquote {
+    @apply text-black;
+  }
+
+  .prose table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .prose th,
+  .prose td {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+  }
+
+  textarea::-webkit-resizer {
+    display: none;
+  }
+
+  textarea {
+    scrollbar-width: none; /* Pour Firefox */
+    -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
+  }
+
+  textarea::-webkit-scrollbar {
+    display: none; /* Pour Chrome, Safari et Opera */
+  }
+
+  .font-mono,
+  .prose code,
+  .prose td.numeric {
+    font-family: var(--font-ibm-plex-mono), monospace;
+  }
+}
+
+/* Styles des cartes */
+@layer components {
+  .cardContainer {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 500px;
+    width: 1000px;
+    border-radius: 25px;
+    padding: 50px;
+    transform-origin: top;
+  }
+
+  .card h2 {
+    text-align: center;
+    margin: 0;
+    font-size: 28px;
+  }
+
+  .card .body {
+    display: flex;
+    height: 100%;
+    margin-top: 50px;
+    gap: 50px;
+  }
+
+  .card .body .description {
+    width: 40%;
+    position: relative;
+    top: 10%;
+  }
+
+  .card .body .description p {
+    font-size: 16px;
+  }
+
+  .card .body .description p::first-letter {
+    font-size: 28px;
+    font-family: 'Title';
+  }
+
+  .card .body .description span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .card .body .description span a {
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .card .body .imageContainer {
+    position: relative;
+    width: 60%;
+    height: 100%;
+    border-radius: 25px;
+    overflow: hidden;
+  }
+
+  .card .body .imageContainer .inner {
+    width: 100%;
+    height: 100%;
+  }
+
+  .card .body .imageContainer img {
+    object-fit: cover;
+  }
+
+  .footer-link {
+    @apply text-muted-foreground transition-colors hover:text-slate-300;
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50%));
+  }
+}
+
+.animate-scroll {
+  animation: scroll linear infinite;
+}
+
+  /* Classes pour les scrollbars */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary-foreground)) hsl(var(--muted));
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
