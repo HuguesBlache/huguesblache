@@ -33,15 +33,16 @@ export default function RootLayout({
     return (
       <div className="flex flex-col w-full">
         {/* Header en haut */}
-        <div className="w-full">
-          <Face />
-        </div>
+       
         
         {/* Contenu principal en dessous */}
         <div className="flex w-full flex-col overflow-auto">
           <div className="flex-1 overflow-hidden">
             {children}
           </div>
+        </div>
+        <div className="w-full">
+          <Face />
         </div>
       </div>
     );

@@ -32,7 +32,7 @@ export default function Face() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.8 , delay: 2.5}}
       className="mx-4 mt-16 max-w-2xl rounded-lg bg-gray-950 shadow-xl text-gray-800 border border-gray-600 sm:mx-auto sm:max-w-sm md:mx-auto md:max-w-sm lg:mx-auto lg:max-w-sm xl:mx-auto xl:max-w-sm"
     >
       <div className="h-30 overflow-hidden rounded-t-lg">
