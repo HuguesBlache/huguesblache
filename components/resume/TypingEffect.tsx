@@ -1,6 +1,6 @@
 // src/components/resume/TypingEffect.tsx
 import { useState, useEffect } from 'react';
-import { TypingEffectProps } from '@/types/resumeTypes';
+import { TypingEffectProps } from '../types/resumeTypes';
 
 const TypingEffect = ({ text, onComplete }: TypingEffectProps) => {
   const [displayText, setDisplayText] = useState('');

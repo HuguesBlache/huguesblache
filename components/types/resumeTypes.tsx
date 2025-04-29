@@ -6,11 +6,10 @@ export interface TypingEffectProps {
 }
 
 export interface ReviewCardProps {
+  img: string;
+  name: string;
   username: string;
-  avatar: string;
-  review: string;
-  project: string;
-  link: string;
+  body: string;
 }
 
 export interface ExperienceItem {

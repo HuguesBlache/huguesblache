@@ -1,6 +1,6 @@
 // src/components/resume/ReviewCard.tsx
 import { cn } from "@/lib/utils";
-import { ReviewCardProps } from '@/types/resumeTypes';
+import { ReviewCardProps } from '../types/resumeTypes';
 
 const ReviewCard = ({ img, name, username, body }: ReviewCardProps) => {
   return (

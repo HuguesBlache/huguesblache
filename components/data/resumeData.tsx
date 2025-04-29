@@ -162,45 +162,46 @@ export const educationData: EducationItem[] = [
   }
 ];
 
+// src/components/data/resumeData.tsx
+
 export const reviews: ReviewCardProps[] = [
   {
+    img: "https://avatar.vercel.sh/jack",
     name: "Jack",
     username: "@jack",
     body: "I've never seen anything like this before. It's amazing. I love it.",
-    img: "https://avatar.vercel.sh/jack",
   },
   {
+    img: "https://avatar.vercel.sh/jill",
     name: "Jill",
     username: "@jill",
     body: "I don't know what to say. I'm speechless. This is amazing.",
-    img: "https://avatar.vercel.sh/jill",
   },
   {
+    img: "https://avatar.vercel.sh/john",
     name: "John",
     username: "@john",
     body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/john",
   },
   {
+    img: "https://avatar.vercel.sh/jane",
     name: "Jane",
     username: "@jane",
     body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jane",
   },
   {
+    img: "https://avatar.vercel.sh/jenny",
     name: "Jenny",
     username: "@jenny",
     body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jenny",
   },
   {
+    img: "https://avatar.vercel.sh/james",
     name: "James",
     username: "@james",
     body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/james",
   },
 ];
-
 export const slugs = [
   "python",
   "javascript",
