@@ -1,6 +1,6 @@
 "use client";
 
-import Resume from "@/components/landing/Resume";
+import Resume from "@/components/Resume";
 
 export default function Home() {
   return (
