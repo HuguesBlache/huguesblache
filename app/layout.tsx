@@ -1,4 +1,3 @@
-import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, Oswald } from "next/font/google";
 import "./globals.css";
@@ -26,14 +25,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="fr" suppressHydrationWarning>
-        <body
-          className={`${ibmPlex.className} ${oswald.variable} flex min-h-dvh w-full flex-col antialiased`}
-        >
-          <main className="flex flex-1 overflow-hidden">{children}</main>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="fr" suppressHydrationWarning>
+      <body
+        className={`${ibmPlex.className} ${oswald.variable} flex min-h-dvh w-full flex-col antialiased`}
+      >
+        <main className="flex flex-1 overflow-hidden">{children}</main>
+      </body>
+    </html>
   );
 }
