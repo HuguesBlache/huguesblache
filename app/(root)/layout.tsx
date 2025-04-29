@@ -1,5 +1,4 @@
-import Footer from "@/components/landing/Footer";
-import Resume from "@/components/landing/Resume";
+
 import Face from "@/components/landing/Face";
 export default function RootLayout({
   children,
