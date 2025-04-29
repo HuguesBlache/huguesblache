@@ -3,28 +3,14 @@ import { useState } from 'react';
 import { ChevronDown, ChevronUp, Plus, Minus } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-// Définition des types manquants
-export interface ExperienceCategory {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-}
-
-export interface ExperienceItem {
-  id: string;
-  title: string;
-  company?: string;
-  location?: string;
-  duration?: string;
-  description: string;
-  category: string;
-  tags?: string[];
-}
+// Import types from the central type definition file
+import { ExperienceCategory, ExperienceItem } from '@/components/types/resumeTypes';
 
 interface CategoryButtonProps {
   category: ExperienceCategory;
   experiences: ExperienceItem[];
+  isActive: boolean;
+  onClick: () => void;
 }
 
 // Composant d'expérience simplifié pour éviter l'erreur d'importation
@@ -35,9 +21,7 @@ const ExperienceButton = ({ item }: { item: ExperienceItem }) => {
     <div className="mb-3 w-full">
       {/* Bouton de titre avec icône */}
       <motion.button
-     className="flex w-full items-center justify-between rounded-lg bg-white/5 border border-white/10 p-3 text-left text-white hover:bg-white/30"
-
-
+        className="flex w-full items-center justify-between rounded-lg bg-white/5 border border-white/10 p-3 text-left text-white hover:bg-white/30"
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.01 }}
         transition={{ duration: 0.2 }}
@@ -54,7 +38,7 @@ const ExperienceButton = ({ item }: { item: ExperienceItem }) => {
       {/* Contenu détaillé */}
       {isOpen && (
         <motion.div
-          className="mt-1 rounded-lg  p-5 text-white border border-white/10 "
+          className="mt-1 rounded-lg p-5 text-white border border-white/10"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
@@ -74,7 +58,7 @@ const ExperienceButton = ({ item }: { item: ExperienceItem }) => {
             </ul>
           </div>
 
-          {item.achievements.length > 0 && (
+          {item.achievements && item.achievements.length > 0 && (
             <div className="mb-4">
               <h5 className="mb-2 text-base font-medium text-blue-400">Achievements:</h5>
               <ul className="ml-6 list-disc text-gray-300">
@@ -96,7 +80,7 @@ const ExperienceButton = ({ item }: { item: ExperienceItem }) => {
   );
 };
 
-const CategoryButton: React.FC<CategoryButtonProps> = ({ category, experiences }) => {
+const CategoryButton: React.FC<CategoryButtonProps> = ({ category, experiences, isActive, onClick }) => {
   const [isOpen, setIsOpen] = useState(false);
   const filteredExperiences = experiences.filter(exp => exp.category === category.id);
 
@@ -104,8 +88,13 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({ category, experiences }
     <div className="mb-5 w-full">
       {/* Bouton de catégorie avec icône */}
       <motion.button
-        className="flex w-full items-center justify-between rounded-lg bg-white/1 border border-white p-3 text-left text-white hover:bg-white/20"
-        onClick={() => setIsOpen(!isOpen)}
+        className={`flex w-full items-center justify-between rounded-lg ${
+          isActive ? 'bg-white/20' : 'bg-white/1'
+        } border border-white p-3 text-left text-white hover:bg-white/20`}
+        onClick={() => {
+          setIsOpen(!isOpen);
+          onClick();
+        }}
         whileHover={{ scale: 1.01 }}
         transition={{ duration: 0.2 }}
       >

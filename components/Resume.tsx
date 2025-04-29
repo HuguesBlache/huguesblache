@@ -1,23 +1,30 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import { motion } from 'framer-motion';
 
 // Importing components
 import TypingEffect from '@/components/resume/TypingEffect';
 import CategoryButton from '@/components/resume/CategoryButton';
 import EducationItem from '@/components/resume/EducationItem';
-import ExperienceButton from '@/components/resume/ExperienceButton';
 import SkillsCloud from '@/components/resume/SkillsCloud';
 
 // Importing data
 import { categories, experienceData, educationData, reviews, slugs } from '@/components/data/resumeData';
 
-// Alternatively, you could import this from a separate file
+// Import proper types
+import { ReviewCardProps } from '@/components/types/resumeTypes';
 
+// Define types for components
+interface MarqueeProps {
+  children: ReactNode;
+  className?: string;
+  reverse?: boolean;
+  pauseOnHover?: boolean;
+}
 
 // Import or define Marquee component
-const Marquee = ({ children, className, reverse = false, pauseOnHover = false }) => {
+const Marquee = ({ children, className, reverse = false, pauseOnHover = false }: MarqueeProps) => {
   return (
     <div 
       className={`flex gap-4 ${reverse ? 'animate-marquee-reverse' : 'animate-marquee'} ${
@@ -29,29 +36,28 @@ const Marquee = ({ children, className, reverse = false, pauseOnHover = false })
   );
 };
 
-// Define ReviewCard component for the projects section
-const ReviewCard = ({ username, avatar, review, project, link }) => {
+// Using the proper ReviewCardProps interface
+
+const ReviewCard = ({ img, name, username, body }: ReviewCardProps) => {
   return (
     <div className="mx-2 flex w-64 flex-col items-start rounded-lg border border-gray-800 bg-gray-900 p-4 transition-all hover:scale-105">
       <div className="mb-2 flex items-center gap-2">
         <div className="h-10 w-10 overflow-hidden rounded-full bg-gray-700">
-          {avatar && <img src={avatar} alt={username} className="h-full w-full object-cover" />}
+          {img && <img src={img} alt={name} className="h-full w-full object-cover" />}
         </div>
         <div>
-          <h3 className="font-medium text-white">{username}</h3>
+          <h3 className="font-medium text-white">{name}</h3>
+          <p className="text-xs text-gray-400">@{username}</p>
         </div>
       </div>
-      <a href={link} className="mb-2 text-lg font-bold text-blue-400 hover:underline">
-        {project}
-      </a>
-      <p className="text-sm text-gray-400">{review}</p>
+      <p className="text-sm text-gray-400">{body}</p>
     </div>
   );
 };
 
 export default function Resume() {
-  const [typingComplete, setTypingComplete] = useState(false);
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [typingComplete, setTypingComplete] = useState<boolean>(false);
+  const [activeCategory, setActiveCategory] = useState<string>('all');
   
   // Use sessionStorage to communicate between components
   useEffect(() => {
