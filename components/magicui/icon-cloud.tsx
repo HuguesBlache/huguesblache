@@ -24,7 +24,10 @@ function easeOutCubic(t: number): number {
 export function IconCloud({ icons, images }: IconCloudProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [iconPositions, setIconPositions] = useState<Icon[]>([]);
+  
+  // Fix: Add rotation state to component state updates
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  
   const [isDragging, setIsDragging] = useState(false);
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -37,10 +40,15 @@ export function IconCloud({ icons, images }: IconCloudProps) {
     startTime: number;
     duration: number;
   } | null>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number>(0);
   const rotationRef = useRef(rotation);
   const iconCanvasesRef = useRef<HTMLCanvasElement[]>([]);
   const imagesLoadedRef = useRef<boolean[]>([]);
+
+  // Update rotation ref when rotation state changes
+  useEffect(() => {
+    rotationRef.current = rotation;
+  }, [rotation]);
 
   // Create icon canvases once when icons/images change
   useEffect(() => {
@@ -197,10 +205,14 @@ export function IconCloud({ icons, images }: IconCloudProps) {
       const deltaX = e.clientX - lastMousePos.x;
       const deltaY = e.clientY - lastMousePos.y;
 
-      rotationRef.current = {
+      // Update the rotation state along with the ref
+      const newRotation = {
         x: rotationRef.current.x + deltaY * 0.002,
         y: rotationRef.current.y + deltaX * 0.002,
       };
+      
+      rotationRef.current = newRotation;
+      setRotation(newRotation);
 
       setLastMousePos({ x: e.clientX, y: e.clientY });
     }
@@ -232,7 +244,7 @@ export function IconCloud({ icons, images }: IconCloudProps) {
         const progress = Math.min(1, elapsed / targetRotation.duration);
         const easedProgress = easeOutCubic(progress);
 
-        rotationRef.current = {
+        const newRotation = {
           x:
             targetRotation.startX +
             (targetRotation.x - targetRotation.startX) * easedProgress,
@@ -240,15 +252,21 @@ export function IconCloud({ icons, images }: IconCloudProps) {
             targetRotation.startY +
             (targetRotation.y - targetRotation.startY) * easedProgress,
         };
+        
+        rotationRef.current = newRotation;
+        setRotation(newRotation);
 
         if (progress >= 1) {
           setTargetRotation(null);
         }
       } else if (!isDragging) {
-        rotationRef.current = {
+        const newRotation = {
           x: rotationRef.current.x + (dy / canvas.height) * speed,
           y: rotationRef.current.y + (dx / canvas.width) * speed,
         };
+        
+        rotationRef.current = newRotation;
+        setRotation(newRotation);
       }
 
       iconPositions.forEach((icon, index) => {
