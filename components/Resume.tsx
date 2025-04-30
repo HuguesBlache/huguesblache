@@ -8,7 +8,7 @@ import TypingEffect from '@/components/resume/TypingEffect';
 import CategoryButton from '@/components/resume/CategoryButton';
 import EducationItem from '@/components/resume/EducationItem';
 import SkillsCloud from '@/components/resume/SkillsCloud';
-
+import { cn } from "@/lib/utils";
 // Importing data
 import { categories, experienceData, educationData, reviews, slugs } from '@/components/data/resumeData';
 
@@ -16,44 +16,113 @@ import { categories, experienceData, educationData, reviews, slugs } from '@/com
 import { ReviewCardProps } from '@/components/types/resumeTypes';
 
 // Define types for components
+
 interface MarqueeProps {
   children: ReactNode;
   className?: string;
   reverse?: boolean;
+  vertical?: boolean;
+  repeat?: number;
   pauseOnHover?: boolean;
+  duration?: string; // Ajout d'une prop pour contrôler la durée
 }
 
-// Import or define Marquee component
-const Marquee = ({ children, className, reverse = false, pauseOnHover = false }: MarqueeProps) => {
+// Import ou définition du composant Marquee
+const Marquee = ({ 
+  children, 
+  className, 
+  vertical = false,
+  reverse = false,
+  repeat = 3, 
+  pauseOnHover = true,
+  duration = '30s' // Valeur par défaut plus lente (30 secondes)
+}: MarqueeProps) => {
   return (
-    <div 
-      className={`flex gap-4 ${reverse ? 'animate-marquee-reverse' : 'animate-marquee'} ${
-        pauseOnHover ? 'hover:pause-animation' : ''
-      } ${className || ''}`}
+    <div
+      style={{ '--duration': duration } as React.CSSProperties}
+      className={cn(
+        "group relative flex h-full w-full p-100 [--gap:18px] [gap:var(--gap)]",
+        {
+          "flex-col": vertical,
+          "flex-row": !vertical,
+        },
+        className,
+      )}
     >
-      {children}
+      {Array.from({ length: repeat }).map((_, index) => (
+        <div
+          key={`item-${index}`}
+          className={cn("flex shrink-0 [gap:var(--gap)]", {
+            "group-hover:[animation-play-state:paused]": pauseOnHover,
+            "[animation-direction:reverse]": reverse,
+            "animate-marquee-horizontal flex-row": !vertical,
+            "animate-marquee-vertical flex-col": vertical,
+          })}
+          style={{
+            animationDuration: 'var(--duration)'
+          }}
+        >
+          {children}
+        </div>
+      ))}
     </div>
   );
 };
+const ReviewCard = ({ img, name, username, body, link }: ReviewCardProps) => {
+  const [isHovered, setIsHovered] = useState(false);
 
-// Using the proper ReviewCardProps interface
+  const handleClick = () => {
+    // Ouvrir le lien dans un nouvel onglet
+    window.open(link, '_blank');
+  };
 
-const ReviewCard = ({ img, name, username, body }: ReviewCardProps) => {
   return (
-    <div className="mx-2 flex w-64 flex-col items-start rounded-lg border border-gray-800 bg-gray-900 p-4 transition-all hover:scale-105">
-      <div className="mb-2 flex items-center gap-2">
-        <div className="h-10 w-10 overflow-hidden rounded-full bg-gray-700">
-          {img && <img src={img} alt={name} className="h-full w-full object-cover" />}
-        </div>
-        <div>
-          <h3 className="font-medium text-white">{name}</h3>
-          <p className="text-xs text-gray-400">@{username}</p>
-        </div>
+    <div  className="mx-2 flex h-[20rem] w-[18rem] flex-col rounded-lg border border-gray-100 bg-gray-900 transition-all hover:shadow-xl overflow-hidden cursor-pointer"
+     
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={handleClick}
+    >
+      {/* Zone principale pour l'image/iframe */}
+      <div className="flex-grow w-full relative overflow-hidden">
+        {img.endsWith('.jpg') || img.endsWith('.png') || img.endsWith('.jpeg') || img.endsWith('.gif') ? (
+          // Si c'est une image
+          <img
+            src={img}
+            alt={`Image de ${name}`}
+            className="h-full w-full object-cover transition-transform duration-300 ease-in-out"
+            style={{ transform: isHovered ? 'scale(1.05)' : 'scale(1)' }}
+          />
+        ) : (
+          // Si c'est un site web
+          <iframe
+            src={img}
+            className="h-full w-full border-none"
+            title={`Site web de ${name}`}
+            sandbox="allow-same-origin allow-scripts"
+          />
+        )}
+        
+        {/* Superposition avec description au survol */}
+        {isHovered && (
+          <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center p-4 transition-opacity duration-300 ease-in">
+            <div className="text-white text-center">
+              <p className="text-sm italic mb-2">@{username}</p>
+              <p className="text-sm line-clamp-4 overflow-hidden">{body}</p>
+              <button className="mt-2 text-blue-400 hover:text-blue-300 font-medium">
+                See for more detailes
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-      <p className="text-sm text-gray-400">{body}</p>
+      
+      {/* Barre de nom en bas toujours visible */}
+      
     </div>
   );
 };
+// Using the proper ReviewCardProps interface
 
 export default function Resume() {
   const [typingComplete, setTypingComplete] = useState<boolean>(false);
@@ -72,8 +141,8 @@ export default function Resume() {
   }, [typingComplete]);
 
   // Define project rows for the marquee
-  const firstRow = reviews.slice(0, Math.ceil(reviews.length / 2));
-  const secondRow = reviews.slice(Math.ceil(reviews.length / 2));
+  const firstRow = reviews.slice(0, Math.ceil(reviews.length ));
+
 
   return (
     <section id="hero" className="flex min-h-screen w-full flex-col items-start justify-start mt-16 px-4 md:px-10">
@@ -141,37 +210,6 @@ export default function Resume() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              Personal Projects
-            </motion.h2>
-            
-            <motion.div 
-              className="w-full mb-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            >
-              <div className="relative flex w-full flex-col items-center justify-center overflow-hidden py-8">
-                <Marquee pauseOnHover className="[--duration:20s]">
-                  {firstRow.map((review) => (
-                    <ReviewCard key={review.username} {...review} />
-                  ))}
-                </Marquee>
-                <Marquee reverse pauseOnHover className="[--duration:20s] mt-4">
-                  {secondRow.map((review) => (
-                    <ReviewCard key={review.username} {...review} />
-                  ))}
-                </Marquee>
-                <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"></div>
-              </div>
-            </motion.div>
-
-            <motion.h2 
-              className="mt-12 mb-6 text-xl md:text-2xl leading-relaxed text-left text-gray-200 dark:text-gray-300 sm:text-2xl lg:text-4xl"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
               Education
             </motion.h2>
             
@@ -192,6 +230,34 @@ export default function Resume() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
+              Personal Website Projects
+            </motion.h2>
+            
+            <motion.div 
+              className="w-full mb-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              <div className="relative flex w-full flex-col items-center justify-center overflow-hidden py-8">
+                <Marquee pauseOnHover className="[--duration:5s]">
+                  {firstRow.map((review) => (
+                    <ReviewCard key={review.username} {...review} />
+                  ))}
+                </Marquee>
+                
+
+                <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"></div>
+              </div>
+            </motion.div>
+
+            <motion.h2 
+              className="mt-12 mb-6 text-xl md:text-2xl leading-relaxed text-left text-gray-200 dark:text-gray-300 sm:text-2xl lg:text-4xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
               Skills
             </motion.h2>
             
@@ -203,6 +269,35 @@ export default function Resume() {
             >
               <SkillsCloud slugs={slugs} />
             </motion.div>
+
+            <motion.h2
+  id="contact"
+  className="mt-24 mb-6 text-xl md:text-2xl leading-relaxed text-left text-gray-200 dark:text-gray-300 sm:text-2xl lg:text-4xl"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.5 }}
+>
+  Get in Touch
+</motion.h2>
+
+<motion.div
+  className="w-full mb-12"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.5, delay: 0.2 }}
+>
+  <p className="text-gray-300 mb-4">
+    Feel free to reach out via email:
+  </p>
+  <a
+    href="mailto:hugues@email.com"
+    className="text-blue-400 hover:text-blue-300 underline"
+  >
+    hugues@email.com
+  </a>
+</motion.div>
+
+
           </>
         )}
       </motion.div>

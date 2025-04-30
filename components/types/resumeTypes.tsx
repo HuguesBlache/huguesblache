@@ -1,5 +1,4 @@
 // src/types/resumeTypes.ts
-
 export interface TypingEffectProps {
   text: string;
   onComplete?: () => void;
@@ -10,6 +9,7 @@ export interface ReviewCardProps {
   name: string;
   username: string;
   body: string;
+  link: string;
 }
 
 export interface ExperienceItem {

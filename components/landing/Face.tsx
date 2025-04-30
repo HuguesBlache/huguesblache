@@ -44,8 +44,8 @@ export default function Face() {
       </div>
       <div className="relative mx-auto -mt-16 h-32 w-32 overflow-hidden rounded-full border-2 border-white">
         <img
-          className="h-32 object-cover object-center"
-          src="/img/1596641736451.jpeg"
+          className="object-cover object-center translate-x-[-1px] translate-y-[-14px] scale-105"
+          src="/img/Hugues_2.jpg"
           alt="Profile"
         />
       </div>
@@ -55,7 +55,9 @@ export default function Face() {
       </div>
       <div className="mt-2 flex justify-center gap-x-6 py-4 text-gray-700">
        
-      <button className="flex items-center justify-center w-10 h-10 rounded-lg border border-white bg-transparent text-white hover:bg-white hover:text-black transition">
+      <button 
+      onClick={() => window.open('https://github.com/HuguesBlache')}
+      className="flex items-center justify-center w-10 h-10 rounded-lg border border-white bg-transparent text-white hover:bg-white hover:text-black transition">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="currentColor"
@@ -66,8 +68,10 @@ export default function Face() {
   </svg>
 </button>
 
-<button className="flex items-center justify-center w-10 h-10 rounded-lg border border-white bg-transparent text-white hover:bg-white hover:text-black transition">
-  <svg
+<button
+  onClick={() => window.open('https://www.linkedin.com/in/hugues-blache/')}
+  className="flex items-center justify-center w-10 h-10 rounded-lg border border-white bg-transparent text-white hover:bg-white hover:text-black transition"
+><svg
     xmlns="http://www.w3.org/2000/svg"
     fill="currentColor"
     viewBox="0 0 512 512"
@@ -78,7 +82,9 @@ export default function Face() {
 </button>
 
 
-<button className="flex items-center justify-center w-10 h-10 rounded-lg border border-white bg-transparent text-white hover:bg-white hover:text-black transition">
+<button 
+onClick={() => window.open('https://scholar.google.com/citations?user=4WlBzzYAAAAJ&hl=fr&oi=ao')}
+className="flex items-center justify-center w-10 h-10 rounded-lg border border-white bg-transparent text-white hover:bg-white hover:text-black transition">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -91,9 +97,28 @@ export default function Face() {
 
       </div>
       <div className="border-t mx-8 py-4 mt-2 text-gray-700 flex items-center justify-around">
-        <button className="text-white hover:text-gray-300 transition">Download my CV</button>
-        <button className="text-white hover:text-gray-300 transition">Contact Me</button>
+      <button
+    onClick={() => window.open('/files/CV_Hugues_Blache.pdf', '_blank')}
+    className="text-white hover:text-gray-300 transition"
+  >
+    Download my CV
+  </button>
+
+  {/* Bouton pour aller à la section Contact */}
+  <button
+    onClick={() => {
+      const section = document.getElementById('contact');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }}
+    className="text-white hover:text-gray-300 transition"
+  >
+    Contact Me
+  </button>
       </div>
+
+     
     </motion.div>
   );
 }

@@ -166,41 +166,21 @@ export const educationData: EducationItem[] = [
 
 export const reviews: ReviewCardProps[] = [
   {
-    img: "https://avatar.vercel.sh/jack",
-    name: "Jack",
-    username: "@jack",
-    body: "I've never seen anything like this before. It's amazing. I love it.",
+    img: "/img/h007.png",
+    name: "Moulin",
+    username: "@moulin",
+    link: "https://h007.vercel.app/",
+    body: "Working with Sebastien Laurent on a chatbot prototype and an agent-oriented model based on LLM architectures.",
   },
   {
-    img: "https://avatar.vercel.sh/jill",
-    name: "Jill",
-    username: "@jill",
-    body: "I don't know what to say. I'm speechless. This is amazing.",
+    img: "/img/AgentAI_RAG.png",
+    name: "RAG agent",
+    username: "@rag-agent",
+    link: "https://pytsx-three.vercel.app/",
+    body: "First RAG model made public using free cloud services and free APIs",
   },
-  {
-    img: "https://avatar.vercel.sh/john",
-    name: "John",
-    username: "@john",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-  },
-  {
-    img: "https://avatar.vercel.sh/jane",
-    name: "Jane",
-    username: "@jane",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-  },
-  {
-    img: "https://avatar.vercel.sh/jenny",
-    name: "Jenny",
-    username: "@jenny",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-  },
-  {
-    img: "https://avatar.vercel.sh/james",
-    name: "James",
-    username: "@james",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-  },
+  
+ 
 ];
 export const slugs = [
   "python",

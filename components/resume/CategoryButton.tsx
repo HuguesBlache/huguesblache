@@ -4,7 +4,7 @@ import { ChevronDown, ChevronUp, Plus, Minus } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 // Import types from the central type definition file
-import { ExperienceCategory, ExperienceItem } from '@/components/types/resumeTypes';
+import { ExperienceCategory, ExperienceItem } from '../types/resumeTypes';
 
 interface CategoryButtonProps {
   category: ExperienceCategory;

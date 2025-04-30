@@ -1,6 +1,6 @@
 // src/components/resume/EducationItem.tsx
 import { motion } from 'framer-motion';
-import { EducationItem as EducationItemType } from '@/components/types/resumeTypes';
+import { EducationItem as EducationItemType } from '../types/resumeTypes';
 
 interface EducationItemProps {
   item: EducationItemType;

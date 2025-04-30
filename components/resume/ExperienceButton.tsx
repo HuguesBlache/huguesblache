@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
-import { ExperienceItem } from '@/components/types/resumeTypes';
+import { ExperienceItem } from '../types/resumeTypes';
 
 interface ExperienceButtonProps {
   item: ExperienceItem;
