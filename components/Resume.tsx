@@ -167,7 +167,7 @@ export default function Resume() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              Engineer and Researcher
+              PhD Engineer and Researcher
             </motion.h2>
             <motion.p 
               className="mt-8 text-base md:text-lg leading-relaxed text-justify text-gray-300 dark:text-gray-300"
@@ -182,7 +182,7 @@ export default function Resume() {
               className="mt-12 mb-6 text-xl md:text-2xl leading-relaxed text-left text-gray-200 dark:text-gray-300 sm:text-2xl lg:text-4xl"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
               Experience
             </motion.h2>
@@ -191,7 +191,7 @@ export default function Resume() {
               className="w-full"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
+              transition={{ duration: 0.5, delay: 0.3}}
             >
               {categories.map((category) => (
                 <CategoryButton 
@@ -208,7 +208,7 @@ export default function Resume() {
               className="mt-12 mb-6 text-xl md:text-2xl leading-relaxed text-left text-gray-200 dark:text-gray-300 sm:text-2xl lg:text-4xl"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.3}}
             >
               Education
             </motion.h2>
@@ -217,7 +217,7 @@ export default function Resume() {
               className="w-full mb-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
               {educationData.map(item => (
                 <EducationItem key={item.id} item={item} />
@@ -228,7 +228,7 @@ export default function Resume() {
               className="mt-12 mb-6 text-xl md:text-2xl leading-relaxed text-left text-gray-200 dark:text-gray-300 sm:text-2xl lg:text-4xl"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
               Personal Website Projects
             </motion.h2>
@@ -237,7 +237,7 @@ export default function Resume() {
               className="w-full mb-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
               <div className="relative flex w-full flex-col items-center justify-center overflow-hidden py-8">
                 <Marquee pauseOnHover className="[--duration:5s]">
@@ -256,7 +256,7 @@ export default function Resume() {
               className="mt-12 mb-6 text-xl md:text-2xl leading-relaxed text-left text-gray-200 dark:text-gray-300 sm:text-2xl lg:text-4xl"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
               Skills
             </motion.h2>
@@ -265,7 +265,7 @@ export default function Resume() {
               className="w-full mb-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
               <SkillsCloud slugs={slugs} />
             </motion.div>
@@ -284,16 +284,16 @@ export default function Resume() {
   className="w-full mb-12"
   initial={{ opacity: 0 }}
   animate={{ opacity: 1 }}
-  transition={{ duration: 0.5, delay: 0.2 }}
+  transition={{ duration: 0.5, delay: 0.3 }}
 >
   <p className="text-gray-300 mb-4">
     Feel free to reach out via email:
   </p>
   <a
-    href="mailto:hugues@email.com"
+    href="mailto:hugues.blache.pro@gmail.com"
     className="text-blue-400 hover:text-blue-300 underline"
   >
-    hugues@email.com
+    hugues.blache.pro@gmail.com
   </a>
 </motion.div>
 

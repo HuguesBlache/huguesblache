@@ -141,24 +141,28 @@ export const experienceData: ExperienceItem[] = [
 export const educationData: EducationItem[] = [
   {
     id: "phd",
-    degree: "PhD in Transport Engineering",
-    institution: "ENTPE/University of Lyon, France",
+    degree: "Ph.D in Civil Engineering",
+    institution: "ENTPE - School of Civil, Environmental and Urban Engineering, France",
     period: "2021-2024",
+    iconUrl: "/img/entpe.png"  ,
     description: "Research on intelligent transport systems validation methodologies and safety assessment"
   },
   {
     id: "masters",
-    degree: "Master's in Transport Engineering",
+    degree: "Master of Science (research-based) in Civil Engineering",
     institution: "Polytechnique Montreal, Canada",
     period: "2019-2021",
+    iconUrl:"/img/polypng.webp" ,
     description: "Focus on intelligent transport systems and telecommunications"
+    
   },
   {
     id: "bachelors",
-    degree: "Bachelor's in Civil Engineering",
-    institution: "ENTPE, France",
-    period: "2016-2019",
-    description: "Specialization in transport infrastructure and planning"
+    degree: "Master of Science (courses-based) in Civil, Environmental and Urban Engineering",
+    institution: "ENTPE - School of Civil, Environmental and Urban Engineering, France",
+    period: "2017-2021",
+    iconUrl: "/img/entpe.png"  ,
+    description: "Specialization in transport and mobility"
   }
 ];
 

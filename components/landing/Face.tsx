@@ -51,7 +51,7 @@ export default function Face() {
       </div>
       <div className="mt-2 text-center">
         <h2 className="font-semibold text-white">Hugues Blache</h2>
-        <p className="text-gray-500">Engineer and Researcher</p>
+        <p className="text-gray-500">PhD Engineer and Researcher</p>
       </div>
       <div className="mt-2 flex justify-center gap-x-6 py-4 text-gray-700">
        

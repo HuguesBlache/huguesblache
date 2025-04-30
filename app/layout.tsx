@@ -15,9 +15,13 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
-  title: "ResearchAgent",
-  description: "Assistant d'analyse et d'exploration de contenus",
+  title: "Hugues Blache",
+  description: "My website",
+  icons: {
+    icon: "/hugues.png", // ou "/favicon.ico" si c’est ça ton fichier
+  },
 };
+
 
 export default function RootLayout({
   children,

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.12.4",
+    "@emailjs/browser": "^4.4.1",
     "@google/generative-ai": "^0.22.0",
     "@mistralai/mistralai": "^1.5.0",
     "@prisma/client": "^6.5.0",
